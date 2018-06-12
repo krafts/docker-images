@@ -6,3 +6,5 @@ RUN apt-get update \
       && sed -i 's/\(25 6\)\(.*\/etc\/cron.daily\)/58 23\2/g' /etc/crontab \
       && rm -rf /var/lib/apt/lists/* \
       && rm -rf /tmp/* /var/tmp/*
+
+CMD ["/usr/bin/tail", "-f", "/dev/null"]
