@@ -8,7 +8,7 @@ ENV GEM_HOME /fluentd/vendor/bundle/ruby/2.3.0
 # skip runtime bundler installation
 ENV FLUENTD_DISABLE_BUNDLER_INJECTION 1
 
-COPY Gemfile* /fluentd/
+COPY ./Gemfile* /fluentd/
   RUN buildDeps="sudo make gcc g++ libc-dev ruby-dev libffi-dev" \
      && apt-get update \
      && apt-get upgrade -y \
@@ -31,8 +31,8 @@ COPY ./conf/fluent.conf /fluentd/etc/
 COPY ./conf/kubernetes.conf /fluentd/etc/
 
 # Copy plugins
-COPY plugins /fluentd/plugins/
-COPY entrypoint.sh /fluentd/entrypoint.sh
+COPY ./plugins /fluentd/plugins/
+COPY ./entrypoint.sh /fluentd/entrypoint.sh
 
 # Environment variables
 ENV FLUENTD_OPT=""
