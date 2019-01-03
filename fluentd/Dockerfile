@@ -1,4 +1,5 @@
-FROM fluent/fluentd:v1.3.2-debian-onbuild
+FROM fluent/fluentd:v1.3.2-debian
+
 USER root
 WORKDIR /home/fluent
 ENV PATH /fluentd/vendor/bundle/ruby/2.3.0/bin:$PATH
@@ -26,10 +27,11 @@ COPY Gemfile* /fluentd/
     && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
 
 # Copy configuration files
+COPY ./conf/fluent.conf /fluentd/etc/
 COPY ./conf/kubernetes.conf /fluentd/etc/
 
 # Copy plugins
-##COPY plugins /fluentd/plugins/
+COPY plugins /fluentd/plugins/
 COPY entrypoint.sh /fluentd/entrypoint.sh
 
 # Environment variables
